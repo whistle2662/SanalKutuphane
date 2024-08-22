@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Author>
+
+<h2>Yazarlar</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ad</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var author in Model)
+        {
+            <tr>
+                <td>@author.Name</td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = author.Id })">Detay</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

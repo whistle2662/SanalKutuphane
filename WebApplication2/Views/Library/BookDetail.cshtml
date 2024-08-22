@@ -1,0 +1,74 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc
+@using System.Security.Claims
+@model WebApplication2.Models.BookViewModel
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kitap Detayları - Sanal Kütüphane</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">Ana Sayfa</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Account/Login">Çıkış Yap</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container mt-4">
+        <main role="main" class="pb-3">
+            <h1>Kitap Detayları</h1>
+            <div class="card">
+                <div class="card-header">
+                    <h2>@Model.Title</h2>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Yazar: @Model.AuthorName</h5>
+                    <p class="card-text">@Model.Content</p>
+                    @if (Model.ApplicationUserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
+                    {
+                        <form asp-action="ReturnBook" method="post">
+                            <input type="hidden" name="bookId" value="@Model.Id" />
+                            <button type="submit" class="btn btn-primary">Kitabı Geri Ver</button>
+                        </form>
+                    }
+                    else if (Model.ApplicationUserId == null)
+                    {
+                        <form asp-action="BorrowBook" method="post">
+                            <input type="hidden" name="bookId" value="@Model.Id" />
+                            <button type="submit" class="btn btn-primary">Kitabı Al</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <p>Kitap zaten alınmış.</p>
+                    }
+                </div>
+                <div class="card-footer text-right">
+                    <a href="/Library/Index" class="btn btn-primary">Geri Dön</a>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="bg-light text-center py-3 mt-4">
+        <hr />
+        <p>&copy; 2024 - Sanal Kütüphane</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

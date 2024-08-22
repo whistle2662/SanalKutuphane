@@ -1,0 +1,40 @@
+﻿@model WebApplication2.Models.ErrorViewModel
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hata</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">Ana Sayfa</a>
+        </nav>
+    </header>
+    <div class="container mt-4">
+        <main role="main" class="pb-3">
+            <h1>Hata</h1>
+            <h2>Bir hata oluştu.</h2>
+            @if (Model != null)
+            {
+                <p>@Model.RequestId</p>
+            }
+            else
+            {
+                <p>Hata bilgisi bulunamadı.</p>
+            }
+        </main>
+    </div>
+    <footer class="bg-light text-center py-3 mt-4">
+        <hr />
+        <p>&copy; 2024 - Sanal Kütüphane</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

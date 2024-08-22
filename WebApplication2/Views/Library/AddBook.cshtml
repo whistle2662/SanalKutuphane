@@ -1,0 +1,74 @@
+﻿@model WebApplication2.Models.BookViewModel
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kitap Ekle - Sanal Kütüphane</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">Ana Sayfa</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <form asp-controller="Account" asp-action="Logout" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-link nav-link">Çıkış Yap</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container mt-4">
+        <main role="main" class="pb-3">
+            <h1>Kitap Ekle</h1>
+            <form asp-action="AddBook" method="post">
+                <div class="form-group">
+                    <label for="Title">Başlık</label>
+                    <input type="text" class="form-control" id="Title" name="Title" value="@Model.Title" />
+                </div>
+                <div class="form-group">
+                    <label for="SelectedAuthor">Yazar</label>
+                    <select class="form-control" id="SelectedAuthor" name="SelectedAuthorId">
+                        <option value="">-- Seçiniz --</option>
+                        @foreach (var author in Model.Authors)
+
+                        {
+                            <option value="@author.Value">@author.Text</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="NewCategoryName">Kategori</label>
+                    <input type="text" asp-for="NewCategoryName" class="form-control" placeholder="Yeni Kategori Girin">
+                </div>
+                <div class="form-group">
+                    <label for="NewAuthorName">Yeni Yazar Adı</label>
+                    <input type="text" class="form-control" id="NewAuthorName" name="NewAuthorName" />
+                </div>
+                <button type="submit" class="btn btn-secondary" name="action" value="AddNewAuthor">Yeni Yazar Ekle</button>
+                <div class="form-group mt-3">
+                    <label for="Content">İçerik</label>
+                    <textarea class="form-control" id="Content" name="Content" rows="5">@Model.Content</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" name="action" value="AddBook">Kitap Ekle</button>
+            </form>
+        </main>
+    </div>
+    <footer class="bg-light text-center py-3 mt-4">
+        <hr />
+        <p>&copy; 2024 - Sanal Kütüphane</p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
